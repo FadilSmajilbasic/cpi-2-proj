@@ -27,5 +27,9 @@ int main(){
 
 	input >> w;
 
+	text::Word v{"Aa"};
+	text::Word x{"aaa"};
+
+	std::cout << v << x << (v<x) << (v==x) << v;
 
 }
