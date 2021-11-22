@@ -28,8 +28,8 @@ int main(){
 	input >> w;
 
 	text::Word v{"Aa"};
-	text::Word x{"aaa"};
+	text::Word x{"aab"};
 
-	std::cout << v << x << (v<x) << (v==x) << v;
+	std::cout << (v==x);
 
 }

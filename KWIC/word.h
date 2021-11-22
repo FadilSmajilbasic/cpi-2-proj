@@ -24,6 +24,10 @@ namespace text {
 			return  Word::transformWord(word) < Word::transformWord(rhs.word);
 		}
 
+		bool operator==( Word const & rhs) const{
+			return (Word::transformWord(word).compare(Word::transformWord(rhs.word))) == 0;
+		}
+
 		friend std:: istream & operator>>( std::istream & is, Word &);
 		friend std:: ostream & operator<<( std::ostream & os , Word const &);
 	};
@@ -36,9 +40,6 @@ namespace text {
 	}
 	inline bool operator<=( Word const & lhs, Word  const & rhs ){
 		return !(rhs < lhs);
-	}
-	inline bool operator==( Word const & lhs, Word  const & rhs ){
-		return !(lhs < rhs ) && !(rhs < lhs);
 	}
 	inline bool operator!=( Word const & lhs, Word  const & rhs ){
 		return !(lhs == rhs);
