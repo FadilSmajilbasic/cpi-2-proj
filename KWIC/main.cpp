@@ -30,6 +30,6 @@ int main(){
 	text::Word v{"Aa"};
 	text::Word x{"aab"};
 
-	std::cout << (v==x);
+	std::cout << (v==x) << (v<x);
 
 }

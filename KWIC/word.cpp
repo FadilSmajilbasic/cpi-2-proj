@@ -20,6 +20,11 @@ namespace text {
 		}
 	}
 
+	std::string Word::transformWord(std::string s) const {
+		std::transform(s.begin(), s.end(), s.begin(), ::tolower);
+		return s;
+	}
+
 	std::istream & operator>>(std::istream & is, Word & word){
 		std::vector<char> v {};
 		char c{};

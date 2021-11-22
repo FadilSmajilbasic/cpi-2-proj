@@ -3,8 +3,6 @@
 
 #include <string>
 #include <iosfwd>
-#include<algorithm>
-#include <cctype>
 
 namespace text {
 	class Word {
@@ -15,10 +13,7 @@ namespace text {
 		Word() = default;
 		explicit Word(std::string word);
 
-		std::string transformWord(std::string s) const {
-			std::transform(s.begin(), s.end(), s.begin(), ::tolower);
-			return s;
-		}
+		std::string transformWord(std::string s) const;
 
 		bool operator<( Word const & rhs ) const{
 			return  Word::transformWord(word) < Word::transformWord(rhs.word);
