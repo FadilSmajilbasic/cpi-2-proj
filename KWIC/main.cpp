@@ -1,16 +1,11 @@
 #include "word.h"
 #include "kwic.h"
+
 #include <iostream>
 #include <sstream>
+#include <iterator>
+#include <string>
 
 int main(){
-
-
-
-
-	text::Word v{"Aa"};
-	text::Word x{"aab"};
-
-	std::cout << (v==x) << (v<x);
-
+	text::kwic(std::cin, std::cout);
 }

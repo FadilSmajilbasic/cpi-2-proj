@@ -1,17 +1,17 @@
 #ifndef KWIC_H_
 #define KWIC_H_
 
+#include "word.h"
+
 #include <iostream>
+#include <string>
 #include <vector>
 
 namespace text{
-class Kwic{
-public:
-	void kwic(const std::istream in);
+		using phrase = std::vector<text::Word>;
 
-	std::vector<std::vector<std::string>> getTitles(std::vector<std::string> words) ;
-
-};
+		std::vector<phrase> getTitles(std::vector<phrase> words);
+		void kwic(std::istream & in, std::ostream & out);
 }
 
 

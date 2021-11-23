@@ -6,10 +6,9 @@
 
 namespace text {
 	class Word {
+	public:
 		std::string word{"DEFAULT_WORD"};
 
-
-	public:
 		Word() = default;
 		explicit Word(std::string word);
 
