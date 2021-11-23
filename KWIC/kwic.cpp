@@ -8,10 +8,9 @@
 #include <string>
 
 namespace text {
-
 	std::vector<phrase> getTitles(phrase words) {
 		std::vector<phrase> result;
-		for(int i = 1; i < words.size(); i++){
+		for(int i = 0; i < words.size(); i++){
 			std::rotate(words.begin(), words.begin()+i, words.end());
 			result.push_back(words);
 		}

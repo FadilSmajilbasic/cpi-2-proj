@@ -30,7 +30,6 @@ namespace text {
 		char c{};
 		bool inWord{false};
 		while(is.good()){
-			word.word = "";
 			is >> std::noskipws >> c;
 			if(inWord == true && (!std::isalpha(c) || is.fail())){
 				inWord = false;
@@ -40,6 +39,7 @@ namespace text {
 				break;
 			}
 			else if(std::isalpha(c)){
+				word.word = "";
 				inWord = true;
 				v.push_back(c);
 			}

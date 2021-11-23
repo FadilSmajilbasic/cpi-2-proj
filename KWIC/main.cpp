@@ -7,5 +7,6 @@
 #include <string>
 
 int main(){
-	text::kwic(std::cin, std::cout);
+	std::istringstream input{"this is a test \n this is another test"};
+	text::kwic(input, std::cout);
 }
