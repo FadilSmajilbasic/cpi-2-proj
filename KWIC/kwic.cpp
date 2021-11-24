@@ -10,26 +10,42 @@
 namespace text {
 	std::vector<phrase> getTitles(phrase words) {
 		std::vector<phrase> result;
-		for(int i = 0; i < words.size(); i++){
-			std::rotate(words.begin(), words.begin()+i, words.end());
-			result.push_back(words);
+		for(long unsigned int i = 0; i < words.size(); i++){
+			phrase tmp = words;
+
+			std::rotate(tmp.begin(), tmp.begin()+i, tmp.end());
+			result.push_back(tmp);
 		}
 		return result;
 	}
 
 	void kwic(std::istream & is, std::ostream & out) {
-		text::Word line{};
+		std::vector<phrase> phrases{};
 		phrase wordsVector {};
-		while(is.good()){
-			is >> line;
-			wordsVector.push_back(text::Word{line.word});
+
+		for (std::string tmp; std::getline(is, tmp, '\n');) {
+		    std::istringstream str(tmp+" ");
+		    for (text::Word word; str >> word;) {
+		    	wordsVector.push_back(text::Word{word.word});
+		    }
+
+		    phrases.push_back(wordsVector);
+		    wordsVector = phrase{};
 		}
-		std::vector<phrase> kwicFinished = getTitles(wordsVector);
-		for(phrase wordVector : kwicFinished){
-			for(text::Word word : wordVector){
-				out << word.word << " ";
+
+		out << "===============\n";
+
+		std::for_each(phrases.begin(),	 phrases.end(), [&out](phrase singlePhrase ) {
+			std::vector<phrase> kwicFinished = getTitles(singlePhrase);
+			for(phrase wordVector : kwicFinished){
+				for(text::Word word : wordVector){
+					out << word.word << " ";
+				}
+				out << "\n";
 			}
-			out << "\n";
-		}
+		});
+
+
+
 	}
 }
