@@ -8,8 +8,9 @@
 #include <string>
 
 namespace text {
-	std::vector<phrase> getTitles(phrase words) {
+	std::vector<phrase> getCombinations(phrase words) {
 		std::vector<phrase> result;
+
 		for(long unsigned int i = 0; i < words.size(); i++){
 			phrase tmp = words;
 
@@ -36,7 +37,7 @@ namespace text {
 		out << "===============\n";
 
 		std::for_each(phrases.begin(),	 phrases.end(), [&out](phrase singlePhrase ) {
-			std::vector<phrase> kwicFinished = getTitles(singlePhrase);
+			std::vector<phrase> kwicFinished = getCombinations(singlePhrase);
 			for(phrase wordVector : kwicFinished){
 				for(text::Word word : wordVector){
 					out << word.word << " ";
