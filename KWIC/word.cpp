@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 namespace text {
 	Word::Word(std::string str){
@@ -15,10 +16,10 @@ namespace text {
 			if(!std::isalpha(c)) { valid = false; }
 		});
 
-		if(valid){
+		if(valid && str.size() > 0){
 			word = str;
 		}else{
-			throw new std::invalid_argument{};
+			throw std::invalid_argument("Invalid syntax.");
 		}
 	}
 
