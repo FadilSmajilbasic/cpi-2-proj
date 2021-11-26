@@ -4,6 +4,7 @@
 #include <cctype>
 #include <ios>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -32,9 +33,11 @@ namespace text {
 		std::vector<char> v {};
 		char c{};
 		bool inWord{false};
+		std::istreambuf_iterator isCopy{is};
+		is >> std::noskipws;
 		while(is.good()){
-			is >> std::noskipws >> c;
 			if(inWord == true && (!std::isalpha(c) || is.fail())){
+
 				inWord = false;
 				for(char charInV : v){
 					word.word += charInV;
