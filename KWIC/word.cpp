@@ -17,6 +17,8 @@ namespace text {
 
 		if(valid){
 			word = str;
+		}else{
+			throw new std::invalid_argument{};
 		}
 	}
 
