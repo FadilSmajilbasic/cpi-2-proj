@@ -34,41 +34,23 @@ namespace text {
 		std::vector<char> v {};
 		char c{};
 		bool valid{true};
-		std::ostringstream oString{};
-		std::istreambuf_iterator<char> isCopy { is };
-//		std::istringstream iSS{};
-//		is >> iSS;
 
-//		std::copy_if(is, pal+size, back_inserter(pal_raw),
-//		        [](char item) {return isalpha(item); }
-//		    );
 
-		std::copy_if(std::begin(isCopy),std::end(isCopy) , oString, [](char item) {
-			if(isalpha(item	))
-				return true;
-			else
+		while(is.good()){
+			if(valid && (!std::isalpha(c) || is.fail())){
+
 				valid = false;
-				return false;
-		})
-//		while(is.good()){
-//			if(inWord && (!std::isalpha(c) || is.fail())){
-//
-//				inWord = false;
-//				for(char charInV : v){
-//					word.word += charInV;
-//				}
-//				break;
-//			}
-//			else if(std::isalpha(c)){
-//				word.word = "";
-//				inWord = true;
-//				v.push_back(c);
-//			}
-//		}
-		if(valid)
-			word.word = oString.str();
-		else
-			word.word = "";
+				for(char charInV : v){
+					word.word += charInV;
+				}
+				break;
+			}
+			else if(std::isalpha(c)){
+				word.word = "";
+				valid = true;
+				v.push_back(c);
+			}
+		}
 		return is;
 	}
 
