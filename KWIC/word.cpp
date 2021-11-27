@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <cctype>
 
 namespace text {
 	Word::Word(std::string str){
@@ -33,10 +34,18 @@ namespace text {
 		std::vector<char> v {};
 		char c{};
 		bool inWord{false};
-		std::istreambuf_iterator isCopy{is};
-		is >> std::noskipws;
+//		std::istreambuf_iterator<char> isCopy { is };
+//		std::istreambuf_iterator<char> const eof { };
+//		std::istringstream iSS{};
+//		is >> iSS;
+
+//		std::copy_if(is, pal+size, back_inserter(pal_raw),
+//		        [](char item) {return isalpha(item); }
+//		    );
+
+//		std::copy_if(is, , __result, __pred)
 		while(is.good()){
-			if(inWord == true && (!std::isalpha(c) || is.fail())){
+			if(inWord && (!std::isalpha(c) || is.fail())){
 
 				inWord = false;
 				for(char charInV : v){
