@@ -38,9 +38,6 @@ namespace text {
 			is >> c;
 			if(inWord == true && (!std::isalpha(c) || is.fail())){
 				inWord = false;
-				for(char charInV : v){
-					word.word += charInV;
-				}
 				break;
 			}
 			else if(std::isalpha(c)){
@@ -48,6 +45,9 @@ namespace text {
 				inWord = true;
 				v.push_back(c);
 			}
+		}
+		for(char charInV : v){
+			word.word += charInV;
 		}
 		return is;
 	}

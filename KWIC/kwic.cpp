@@ -34,8 +34,6 @@ namespace text {
 		    wordsVector = phrase{};
 		}
 
-		out << "===============\n";
-
 		std::for_each(phrases.begin(),	 phrases.end(), [&out](phrase singlePhrase ) {
 			std::vector<phrase> kwicFinished = getCombinations(singlePhrase);
 			for(phrase wordVector : kwicFinished){
