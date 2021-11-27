@@ -11,21 +11,20 @@
 
 using text::Word;
 
-void inputTestKwic(){
-	std::istringstream input{"this is a test\nthis is another test"};
-	std::ostringstream output{};
+void inputTestKwic() {
+	std::istringstream input { "this is a test\nthis is another test" };
+	std::ostringstream output { };
 	text::kwic(input, output);
-	ASSERT_EQUAL("this is a test \nis a test this \na test this is \ntest this is a \nthis is another test \nis another test this \nanother test this is \ntest this is another \n", output.str());
+	ASSERT_EQUAL(
+			"this is a test \nis a test this \na test this is \ntest this is a \nthis is another test \nis another test this \nanother test this is \ntest this is another \n",
+			output.str());
 }
 
 void inputTestWord() {
-	std::istringstream input{"compl33tely ~ weird !!?!! 4matted in_put"};
-	std::ostringstream output{};
+	std::istringstream input { "compl33tely ~ weird !!?!! 4matted in_put" };
+	std::ostringstream output { };
 
-	Word w{};
-
-	input >> w;
-	output << w << "\n";
+	Word w { };
 
 	input >> w;
 	output << w << "\n";
@@ -42,7 +41,10 @@ void inputTestWord() {
 	input >> w;
 	output << w << "\n";
 
-	ASSERT_EQUAL("compl\ntely\nweird\nmatted\nin\nput\n",output.str());
+	input >> w;
+	output << w << "\n";
+
+	ASSERT_EQUAL("compl\ntely\nweird\nmatted\nin\nput\n", output.str());
 }
 
 void test_cannot_create_empty_word() {
@@ -74,7 +76,7 @@ void test_same_words_are_equal() {
 }
 
 void test_different_words_are_not_equal() {
-	ASSERT_NOT_EQUAL_TO(Word{"Haskell"}, Word{"ML"});
+	ASSERT_NOT_EQUAL_TO(Word { "Haskell" }, Word { "ML" });
 }
 
 void test_same_word_with_different_cases_are_equal() {
@@ -94,7 +96,7 @@ void test_smaller_word_with_capital_letters_is_smaller() {
 }
 
 void test_same_word_with_different_cases_are_not_smaller() {
-	ASSERT(!(Word {"Groovy"} < Word {"groovy"}));
+	ASSERT(!(Word { "Groovy" } < Word { "groovy" }));
 }
 
 void test_greater_word_is_greater() {
@@ -122,136 +124,136 @@ void test_same_word_is_greater_equal() {
 }
 
 void test_input_operator_single_word() {
-	std::istringstream input{"Elixir"};
-	Word w{};
+	std::istringstream input { "Elixir" };
+	Word w { };
 	input >> w;
-	ASSERT_EQUAL(Word{"Elixir"}, w);
+	ASSERT_EQUAL(Word { "Elixir" }, w);
 }
 
-/*void test_input_operator_single_word_stream_good() {
-	std::istringstream input{"Cobol"};
-	Word w{};
-	ASSERT(input >> w);
-}*/
+void test_input_operator_single_word_stream_good() {
+ std::istringstream input{"Cobol"};
+ Word w{};
+ ASSERT(input >> w);
+ }
 
 void test_input_operator_called_once_first_word() {
-	std::istringstream input{"Ceylon Go"};
-	Word w{};
+	std::istringstream input { "Ceylon Go" };
+	Word w { };
 	input >> w;
-	ASSERT_EQUAL(Word{"Ceylon"}, w);
+	ASSERT_EQUAL(Word { "Ceylon" }, w);
 }
 
 void test_input_operator_called_once_stream_good() {
-	std::istringstream input{"Lua Oberon"};
-	Word w{};
+	std::istringstream input { "Lua Oberon" };
+	Word w { };
 	ASSERT(input >> w);
 }
 
 void test_input_operator_on_empty_stream_fail() {
-	std::istringstream input{};
-	Word w{};
+	std::istringstream input { };
+	Word w { };
 	input >> w;
 	ASSERT(input.fail());
 }
 
 void test_input_operator_on_stream_without_word() {
-	std::istringstream input{"1337"};
-	Word w{};
+	std::istringstream input { "1337" };
+	Word w { };
 	input >> w;
 	ASSERT(input.fail());
 }
 
 void test_input_operator_on_empty_stream_word_unchanged() {
-	std::istringstream input{};
-	Word w{"Eiffel"};
+	std::istringstream input { };
+	Word w { "Eiffel" };
 	input >> w;
-	ASSERT_EQUAL(Word{"Eiffel"}, w);
+	ASSERT_EQUAL(Word { "Eiffel" }, w);
 }
 
 void test_input_operator_stops_on_slash() {
-	std::istringstream input{"PL/SQL"};
-	Word w{};
+	std::istringstream input { "PL/SQL" };
+	Word w { };
 	input >> w;
-	ASSERT_EQUAL(Word{"PL"}, w);
+	ASSERT_EQUAL(Word { "PL" }, w);
 }
 
-/*void test_input_operator_stops_at_end_of_word() {
-	std::istringstream input{"VB6"};
-	Word w{};
-	int i{};
+void test_input_operator_stops_at_end_of_word() {
+	std::istringstream input { "VB6" };
+	Word w { };
+	int i { };
+
 	input >> w >> i;
+
 	ASSERT_EQUAL(6, i);
-}*/
+}
 
 void test_input_operator_skips_leading_non_alpha() {
-	std::istringstream input{"3switchBF"};
-	Word w{};
+	std::istringstream input { "3switchBF" };
+	Word w { };
 	input >> w;
-	ASSERT_EQUAL(Word{"switchBF"}, w);
+	ASSERT_EQUAL(Word { "switchBF" }, w);
 }
 
 void test_input_operator_overwrites_word() {
-	std::istringstream input{"Kotlin"};
-	Word w{"JavaScript"};
+	std::istringstream input { "Kotlin" };
+	Word w { "JavaScript" };
 	input >> w;
-	ASSERT_EQUAL(Word{"Kotlin"}, w);
+	ASSERT_EQUAL(Word { "Kotlin" }, w);
 }
 
 void test_exercise_example() {
-	std::istringstream input{"compl33tely ~ weird !!?!! 4matted in_put"};
+	std::istringstream input { "compl33tely ~ weird !!?!! 4matted in_put" };
 
-	Word w{};
+	Word w { };
 	input >> w;
-	ASSERT_EQUAL(Word{"compl"}, w);
+	ASSERT_EQUAL(Word { "compl" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"tely"}, w);
+	ASSERT_EQUAL(Word { "tely" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"weird"}, w);
+	ASSERT_EQUAL(Word { "weird" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"matted"}, w);
+	ASSERT_EQUAL(Word { "matted" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"in"}, w);
+	ASSERT_EQUAL(Word { "in" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"put"}, w);
+	ASSERT_EQUAL(Word { "put" }, w);
 	input >> w;
-	ASSERT_EQUAL(Word{"put"}, w);
+	ASSERT_EQUAL(Word { "put" }, w);
 }
-
-
 
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 	s.push_back(CUTE(inputTestWord));
 	s.push_back(CUTE(test_cannot_create_empty_word));
-		s.push_back(CUTE(test_cannot_create_word_with_space));
-		s.push_back(CUTE(test_cannot_create_word_with_number));
-		s.push_back(CUTE(test_cannot_create_word_with_punctuation));
-		s.push_back(CUTE(test_output_operator));
-		s.push_back(CUTE(test_same_words_are_equal));
-		s.push_back(CUTE(test_same_word_with_different_cases_are_equal));
-		s.push_back(CUTE(test_same_word_is_not_lower_than));
-		s.push_back(CUTE(test_smaller_word_with_capital_letters_is_smaller));
-		s.push_back(CUTE(test_smaller_word_is_smaller));
-		s.push_back(CUTE(test_greater_word_is_greater));
-		s.push_back(CUTE(test_greater_word_with_capital_letters_is_greater));
-		s.push_back(CUTE(test_smaller_word_is_less_equal));
-		s.push_back(CUTE(test_same_word_is_less_equal));
-		s.push_back(CUTE(test_greater_word_is_greater_equal));
-		s.push_back(CUTE(test_same_word_is_greater_equal));
-		s.push_back(CUTE(test_different_words_are_not_equal));
-		s.push_back(CUTE(test_input_operator_single_word));
-		s.push_back(CUTE(test_input_operator_called_once_first_word));
-		s.push_back(CUTE(test_input_operator_called_once_stream_good));
-		//s.push_back(CUTE(test_input_operator_single_word_stream_good));
-		s.push_back(CUTE(test_input_operator_on_empty_stream_fail));
-		s.push_back(CUTE(test_input_operator_on_empty_stream_word_unchanged));
-		s.push_back(CUTE(test_input_operator_stops_on_slash));
-		//s.push_back(CUTE(test_input_operator_stops_at_end_of_word));
-		s.push_back(CUTE(test_input_operator_skips_leading_non_alpha));
-		s.push_back(CUTE(test_same_word_with_different_cases_are_not_smaller));
-		s.push_back(CUTE(test_input_operator_overwrites_word));
-		s.push_back(CUTE(test_input_operator_on_stream_without_word));
-		s.push_back(CUTE(test_exercise_example));
+	s.push_back(CUTE(test_cannot_create_word_with_space));
+	s.push_back(CUTE(test_cannot_create_word_with_number));
+	s.push_back(CUTE(test_cannot_create_word_with_punctuation));
+	s.push_back(CUTE(test_output_operator));
+	s.push_back(CUTE(test_same_words_are_equal));
+	s.push_back(CUTE(test_same_word_with_different_cases_are_equal));
+	s.push_back(CUTE(test_same_word_is_not_lower_than));
+	s.push_back(CUTE(test_smaller_word_with_capital_letters_is_smaller));
+	s.push_back(CUTE(test_smaller_word_is_smaller));
+	s.push_back(CUTE(test_greater_word_is_greater));
+	s.push_back(CUTE(test_greater_word_with_capital_letters_is_greater));
+	s.push_back(CUTE(test_smaller_word_is_less_equal));
+	s.push_back(CUTE(test_same_word_is_less_equal));
+	s.push_back(CUTE(test_greater_word_is_greater_equal));
+	s.push_back(CUTE(test_same_word_is_greater_equal));
+	s.push_back(CUTE(test_different_words_are_not_equal));
+	s.push_back(CUTE(test_input_operator_single_word));
+	s.push_back(CUTE(test_input_operator_called_once_first_word));
+	s.push_back(CUTE(test_input_operator_called_once_stream_good));
+	s.push_back(CUTE(test_input_operator_single_word_stream_good));
+	s.push_back(CUTE(test_input_operator_on_empty_stream_fail));
+	s.push_back(CUTE(test_input_operator_on_empty_stream_word_unchanged));
+	s.push_back(CUTE(test_input_operator_stops_on_slash));
+	s.push_back(CUTE(test_input_operator_stops_at_end_of_word));
+	s.push_back(CUTE(test_input_operator_skips_leading_non_alpha));
+	s.push_back(CUTE(test_same_word_with_different_cases_are_not_smaller));
+	s.push_back(CUTE(test_input_operator_overwrites_word));
+	s.push_back(CUTE(test_input_operator_on_stream_without_word));
+	s.push_back(CUTE(test_exercise_example));
 	s.push_back(CUTE(inputTestKwic));
 
 	cute::xml_file_opener xmlfile(argc, argv);
@@ -262,5 +264,5 @@ bool runAllTests(int argc, char const *argv[]) {
 }
 
 int main(int argc, char const *argv[]) {
-    return runAllTests(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE;
+	return runAllTests(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
