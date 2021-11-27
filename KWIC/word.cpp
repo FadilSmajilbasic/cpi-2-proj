@@ -33,11 +33,10 @@ namespace text {
 		std::vector<char> v {};
 		char c{};
 		bool inWord{false};
-		std::istreambuf_iterator isCopy{is};
 		is >> std::noskipws;
 		while(is.good()){
+			is >> c;
 			if(inWord == true && (!std::isalpha(c) || is.fail())){
-
 				inWord = false;
 				for(char charInV : v){
 					word.word += charInV;
