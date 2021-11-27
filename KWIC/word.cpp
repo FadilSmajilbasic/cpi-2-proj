@@ -33,16 +33,12 @@ namespace text {
 	std::istream & operator>>(std::istream & is, Word & word){
 		std::vector<char> v {};
 		char c{};
-		bool valid{true};
-
-
+		bool inWord{false};
+		is >> std::noskipws;
 		while(is.good()){
-			if(valid && (!std::isalpha(c) || is.fail())){
-
-				valid = false;
-				for(char charInV : v){
-					word.word += charInV;
-				}
+			is >> c;
+			if(inWord == true && (!std::isalpha(c) || is.fail())){
+				inWord = false;
 				break;
 			}
 			else if(std::isalpha(c)){
@@ -50,6 +46,9 @@ namespace text {
 				valid = true;
 				v.push_back(c);
 			}
+		}
+		for(char charInV : v){
+			word.word += charInV;
 		}
 		return is;
 	}
