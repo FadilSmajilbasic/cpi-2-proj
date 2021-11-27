@@ -33,9 +33,9 @@ namespace text {
 	std::istream & operator>>(std::istream & is, Word & word){
 		std::vector<char> v {};
 		char c{};
-		bool inWord{false};
-//		std::istreambuf_iterator<char> isCopy { is };
-//		std::istreambuf_iterator<char> const eof { };
+		bool valid{true};
+		std::ostringstream oString{};
+		std::istreambuf_iterator<char> isCopy { is };
 //		std::istringstream iSS{};
 //		is >> iSS;
 
@@ -43,22 +43,32 @@ namespace text {
 //		        [](char item) {return isalpha(item); }
 //		    );
 
-//		std::copy_if(is, , __result, __pred)
-		while(is.good()){
-			if(inWord && (!std::isalpha(c) || is.fail())){
-
-				inWord = false;
-				for(char charInV : v){
-					word.word += charInV;
-				}
-				break;
-			}
-			else if(std::isalpha(c)){
-				word.word = "";
-				inWord = true;
-				v.push_back(c);
-			}
-		}
+		std::copy_if(std::begin(isCopy),std::end(isCopy) , oString, [](char item) {
+			if(isalpha(item	))
+				return true;
+			else
+				valid = false;
+				return false;
+		})
+//		while(is.good()){
+//			if(inWord && (!std::isalpha(c) || is.fail())){
+//
+//				inWord = false;
+//				for(char charInV : v){
+//					word.word += charInV;
+//				}
+//				break;
+//			}
+//			else if(std::isalpha(c)){
+//				word.word = "";
+//				inWord = true;
+//				v.push_back(c);
+//			}
+//		}
+		if(valid)
+			word.word = oString.str();
+		else
+			word.word = "";
 		return is;
 	}
 
