@@ -30,13 +30,13 @@ std::string Word::transformWord(std::string s) const {
 }
 
 std::istream& operator>>(std::istream &is, Word &word) {
-
 	if (is.rdbuf()->in_avail() > 0) { // check if input stream has any element
+
 		char temp { };
 		bool ignoredAChar { false };
 		word.value = "";
 		is >> std::noskipws;
-		temp = is.peek(); // peek at first char
+		temp = is.peek(); // peek at first char Cobol
 
 		while (temp != EOF) { // check if next char is not EOF
 
@@ -63,7 +63,6 @@ std::istream& operator>>(std::istream &is, Word &word) {
 
 	if (word.value.empty() || is.rdbuf()->in_avail() == 0) { // set input as failed if no valid chars were found
 		is.setstate(std::ios::failbit);
-
 	}
 	return is;
 }
