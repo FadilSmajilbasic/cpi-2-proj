@@ -12,12 +12,10 @@
 using text::Word;
 
 void inputTestKwic() {
-	std::istringstream input { "this is a test\nthis is another test" };
+	std::istringstream input { "a b c d" };
 	std::ostringstream output { };
 	text::kwic(input, output);
-	ASSERT_EQUAL(
-			"this is a test \nis a test this \na test this is \ntest this is a \nthis is another test \nis another test this \nanother test this is \ntest this is another \n",
-			output.str());
+	ASSERT_EQUAL("test", output.str());
 }
 
 void inputTestWord() {
@@ -131,10 +129,10 @@ void test_input_operator_single_word() {
 }
 
 void test_input_operator_single_word_stream_good() {
- std::istringstream input{"Cobol"};
- Word w{};
- ASSERT(input >> w);
- }
+	std::istringstream input { "Cobol" };
+	Word w { };
+	ASSERT(input >> w);
+}
 
 void test_input_operator_called_once_first_word() {
 	std::istringstream input { "Ceylon Go" };

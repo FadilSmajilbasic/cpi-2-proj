@@ -7,7 +7,7 @@
 namespace text {
 	class Word {
 	public:
-		std::string word{""};
+		std::string value{""};
 
 		Word() = default;
 		explicit Word(std::string word);
@@ -15,11 +15,11 @@ namespace text {
 		std::string transformWord(std::string s) const;
 
 		bool operator<( Word const & rhs ) const{
-			return  Word::transformWord(word) < Word::transformWord(rhs.word);
+			return  Word::transformWord(value) < Word::transformWord(rhs.value);
 		}
 
 		bool operator==( Word const & rhs) const{
-			return (Word::transformWord(word).compare(Word::transformWord(rhs.word))) == 0;
+			return (Word::transformWord(value).compare(Word::transformWord(rhs.value))) == 0;
 		}
 
 		friend std:: istream & operator>>( std::istream & is, Word &);
