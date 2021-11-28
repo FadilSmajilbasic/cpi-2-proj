@@ -30,7 +30,7 @@ std::string Word::transformWord(std::string s) const {
 }
 
 std::istream& operator>>(std::istream &is, Word &word) {
-	if (is.rdbuf()->in_avail() > 0) { // check if input stream has any element
+	if (is.good() && is.rdbuf()->in_avail() > 0) { // check if input stream has any element
 
 		char temp { };
 		bool ignoredAChar { false };
